@@ -1,5 +1,5 @@
 'use client';
-import React,{ createContext, useContext, useState } from "react";
+import React, {createContext, useContext, useEffect, useState} from "react";
 
 const GlobalContext = createContext();
 
@@ -11,17 +11,32 @@ export const GlobalProvider = ({ children }) => {
     const [amountFilter, setAmountFilter] = useState(''); // Minimum amount filter
     const [minPrice, setMinPrice] = useState(0); // Minimum price filter
     const [maxPrice, setMaxPrice] = useState(1000);
+    const [selectedProduct, setSelectedProduct] = useState(null);
+    const [productToEdit, setProductToEdit] = useState(null);
+    const categories = ['all',...new Set(products.map((product) => product.category))];
 
-    const fetchProducts = async () => {
-        try{
-            setLoading(true);
-            const response = await fetch(`/api/products`);
-            const data = await response.json();
-            setProducts(data);
-        }catch(err){
-            console.log(err);
-            return err;
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try{
+                setLoading(true);
+                const response = await fetch(`/api/products`);
+                const data = await response.json();
+                setProducts(data);
+            }catch(err){
+                console.log(err);
+                return err;
+            }finally{
+                setLoading(false);
+            }
         }
+        fetchProducts();
+    },[])
+
+    const handleProductClick = (product) => {
+        setSelectedProduct(product);
+    };
+    const handleEdition = (product) => {
+        setProductToEdit(product);
     }
 
     const addProduct = async (product) => {
@@ -93,16 +108,24 @@ export const GlobalProvider = ({ children }) => {
     return (
         <GlobalContext.Provider
             value={{
-                products: filteredProducts,
-                fetchProducts,
+                products,
+                filteredProducts,
                 addProduct,
                 editProduct,
                 deleteProduct,
+                setSelectedProduct,
                 setFilter,
                 setCategoryFilter,
                 setAmountFilter,
                 setMinPrice,
                 setMaxPrice,
+                categories,
+                minPrice,
+                maxPrice,
+                handleProductClick,
+                selectedProduct,
+                handleEdition,
+                productToEdit,
             }}
         >
             {children}
