@@ -54,20 +54,26 @@ export async function POST(req){
     return NextResponse.json(newProduct);
 }
 
-export async function PUT(req){
-    const {searchParams} = new URL(req.url);
+export async function PUT(req) {
+    const { searchParams } = new URL(req.url);
     const id = parseInt(searchParams.get("id"));
     const products = loadProducts();
     const updatedProduct = await req.json();
+
+    // Find the product index
     const productIndex = products.findIndex((product) => product.id === id);
 
-    if(productIndex !== -1){
-        return NextResponse.json({message: 'Product not found'},{ status: 404 });
+    // If product not found, return 404
+    if (productIndex === -1) {
+        return NextResponse.json({ message: 'Product not found' }, { status: 404 });
     }
 
-    products[productIndex] = {...products[productIndex], ...updatedProduct};
+    // Update the product and save changes
+    products[productIndex] = { ...products[productIndex], ...updatedProduct };
     saveProducts(products);
-    return NextResponse.json(products[productIndex], {status:200});
+
+    // Return the updated product
+    return NextResponse.json(products[productIndex], { status: 200 });
 }
 export async function DELETE(req){
     const {searchParams} = new URL(req.url);

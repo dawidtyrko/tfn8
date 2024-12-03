@@ -1,6 +1,8 @@
 import localFont from "next/font/local";
 import "./globals.css";
 import {GlobalProvider} from "@/app/GlobalContext";
+import Link from "next/link";
+import {NotificationProvider} from "@/app/NotificationContext";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -22,9 +24,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <NotificationProvider>
       <GlobalProvider>
         {children}
       </GlobalProvider>
+      </NotificationProvider>
       </body>
     </html>
   );

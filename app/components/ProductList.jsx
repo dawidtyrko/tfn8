@@ -1,7 +1,10 @@
-'use client'
-import React from 'react';
+'use client';
+import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
 import {useGlobalContext} from "@/app/GlobalContext";
 import ProductItem from "@/app/components/ProductItem";
+import Link from "next/link";
+import {useNotificationsContext} from "@/app/NotificationContext";
+
 const ProductList = () => {
     const {
         products,
@@ -16,11 +19,44 @@ const ProductList = () => {
         categoryFilter,
         amountFilter,
         filter,
+        setSelectedProduct,
     } = useGlobalContext();
-    console.log(products);
-    console.log(categoryFilter)
+    const {addNotifications,notifications,removeNotification} = useNotificationsContext();
+    const [prevProductCount, setPrevProductCount] = useState(products.length);
+    const productRef = useRef({});
+    const isNewProductAdded = products.length > prevProductCount;
+    const [currentNotification, setCurrentNotifications] = useState('');
+
+    useEffect(() => {
+        setPrevProductCount(products.length);
+    }, [products.length]);
+
+
+
+    useLayoutEffect(() => {
+        if (isNewProductAdded && products.length > 0) {
+            const lastProduct = products[products.length - 1];
+            const lastProductRef = productRef.current[lastProduct.id];
+
+            if (lastProductRef) {
+                lastProductRef.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center',
+                });
+            }
+        }
+    }, [isNewProductAdded, products]);
+    useLayoutEffect(() => {
+        setCurrentNotifications(notifications);
+    }, [notifications]);
+    const handleAddProductClick = () => {
+        setSelectedProduct(null);
+    };
+    const handleCLearNotifications = ()=>{
+
+    }
     const filteredProducts = products.filter((product) => {
-        const filterString = filter || '';  // Ensure filter is a valid string (defaults to an empty string)
+        const filterString = filter || ''; // Ensure filter is a valid string (defaults to an empty string)
 
         // Name filter logic
         const matchesName = product.name && product.name.toLowerCase().includes(filterString.toLowerCase());
@@ -36,9 +72,22 @@ const ProductList = () => {
 
         return matchesName && matchesCategory && matchesAmount && matchesPrice;
     });
+
     return (
-        <div>
-            <div style={{textAlign: "center"}}>
+        <div style={{textAlign: "center"}}>
+            {currentNotification && (
+                <div style={{
+                    backgroundColor: '#4caf50',
+                    color: 'white',
+                    padding: '10px',
+                    margin: '10px 0',
+                    borderRadius: '5px'
+                }}>
+                    {currentNotification}
+                </div>
+            )}
+            <Link href='/product' onClick={handleAddProductClick}>Add product</Link>
+            <div>
                 <div style={{padding: '5px'}}>
                     <input
                         style={{color: 'black', backgroundColor: '#ffffff'}}
@@ -72,7 +121,7 @@ const ProductList = () => {
 
                 <div>
                     <label>Price Range: ${minPrice} - ${maxPrice}</label>
-                    <br/>
+                    <br />
                     <input
                         type="range"
                         min="0"
@@ -82,23 +131,22 @@ const ProductList = () => {
                     <input
                         type="range"
                         min="0"
-                        max="1000"
+                        max="3000"
                         onChange={(e) => setMaxPrice(parseInt(e.target.value))}
                     />
                 </div>
-
             </div>
-            {
-                filteredProducts.length > 0 ? (
-                    filteredProducts.map((product, index) => (
-                        <ProductItem key={index} product={product}/>
-                    ))
-                ) : (
-                    <p>No products found</p>
-                )
-            }
-
+            {filteredProducts.length > 0 ? (
+                filteredProducts.map((product, index) => (
+                    <div key={product.id} ref={(el) => (productRef.current[product.id] = el)}>
+                        <ProductItem product={product} />
+                    </div>
+                ))
+            ) : (
+                <p>No products found</p>
+            )}
         </div>
-    )
-}
+    );
+};
+
 export default ProductList;

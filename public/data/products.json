@@ -3,7 +3,7 @@
     "id": 1,
     "name": "Wireless Mouse",
     "category": "Electronics",
-    "amount": 120,
+    "amount": 1200,
     "unitPrice": 15.99,
     "dateAdded": "2024-11-01",
     "supplier": "TechGear Inc."
@@ -12,7 +12,7 @@
     "id": 2,
     "name": "Bluetooth Speaker",
     "category": "Electronics",
-    "amount": 50,
+    "amount": 500,
     "unitPrice": 45.99,
     "dateAdded": "2024-10-20",
     "supplier": "SoundWave Supplies"
@@ -90,7 +90,7 @@
     "supplier": "TechGear Inc."
   },
   {
-    "id": 1,
+    "id": 11,
     "name": "Wireless Mouse",
     "category": "Electronics",
     "amount": 120,
@@ -99,39 +99,132 @@
     "supplier": "TechGear Inc."
   },
   {
-    "id": 2,
-    "name": "Wireless Mouse",
+    "id": 12,
+    "name": "Bluetooth Speaker",
     "category": "Electronics",
-    "amount": 120,
-    "unitPrice": 15.99,
-    "dateAdded": "2024-11-01",
+    "amount": 50,
+    "unitPrice": 45.99,
+    "dateAdded": "2024-10-20",
+    "supplier": "SoundWave Supplies"
+  },
+  {
+    "id": 13,
+    "name": "Organic Green Tea",
+    "category": "Beverages",
+    "amount": 200,
+    "unitPrice": 8.99,
+    "dateAdded": "2024-09-15",
+    "supplier": "Nature's Best Co."
+  },
+  {
+    "id": 14,
+    "name": "Notebook - 200 Pages",
+    "category": "Stationery",
+    "amount": 300,
+    "unitPrice": 2.5,
+    "dateAdded": "2024-10-01",
+    "supplier": "PaperWorks Ltd."
+  },
+  {
+    "id": 15,
+    "name": "Ceramic Coffee Mug",
+    "category": "Kitchenware",
+    "amount": 1500,
+    "unitPrice": 7.49,
+    "dateAdded": "2024-10-10",
+    "supplier": "KitchenPro Supplies"
+  },
+  {
+    "id": 16,
+    "name": "Portable Power Bank",
+    "category": "Electronics",
+    "amount": 8000,
+    "unitPrice": 19.99,
+    "dateAdded": "2024-10-25",
+    "supplier": "BatteryPlus"
+  },
+  {
+    "id": 17,
+    "name": "Leather Wallet",
+    "category": "Accessories",
+    "amount": 40,
+    "unitPrice": 29.99,
+    "dateAdded": "2024-09-30",
+    "supplier": "StyleHub Traders"
+  },
+  {
+    "id": 18,
+    "name": "Desk Lamp",
+    "category": "Home Decor",
+    "amount": 70,
+    "unitPrice": 25.49,
+    "dateAdded": "2024-11-05",
+    "supplier": "BrightLiving"
+  },
+  {
+    "id": 19,
+    "name": "Running Shoes",
+    "category": "Footwear",
+    "amount": 60,
+    "unitPrice": 55.99,
+    "dateAdded": "2024-10-12",
+    "supplier": "FitGear Co."
+  },
+  {
+    "id": 20,
+    "name": "Wireless Keyboard",
+    "category": "Electronics",
+    "amount": 90,
+    "unitPrice": 22.49,
+    "dateAdded": "2024-11-10",
     "supplier": "TechGear Inc."
   },
   {
-    "id": 3,
-    "name": "Wireless Mouse",
+    "id": 21,
+    "name": "demo1",
     "category": "Electronics",
-    "amount": 120,
-    "unitPrice": 15.99,
-    "dateAdded": "2024-11-01",
-    "supplier": "TechGear Inc."
+    "amount": 100,
+    "unitPrice": 20,
+    "supplier": "Nature's Best Co."
   },
   {
-    "id": 4,
-    "name": "Wireless Mouse",
-    "category": "Electronics",
-    "amount": 120,
-    "unitPrice": 15.99,
-    "dateAdded": "2024-11-01",
-    "supplier": "TechGear Inc."
+    "id": 22,
+    "name": "demo2",
+    "category": "Beverages",
+    "amount": 20,
+    "unitPrice": 200,
+    "supplier": "Nature's Best Co."
   },
   {
-    "id": 5,
-    "name": "Wireless Mouse",
-    "category": "Electronics",
-    "amount": 120,
-    "unitPrice": 15.99,
-    "dateAdded": "2024-11-01",
+    "id": 23,
+    "name": "demo3",
+    "category": "Beverages",
+    "amount": 300,
+    "unitPrice": 420,
+    "supplier": "BatteryPlus"
+  },
+  {
+    "id": 24,
+    "name": "demo4",
+    "category": "Stationery",
+    "amount": 420,
+    "unitPrice": 420,
+    "supplier": "BatteryPlus"
+  },
+  {
+    "id": 25,
+    "name": "test",
+    "category": "Stationery",
+    "amount": 20,
+    "unitPrice": 10,
+    "supplier": "BatteryPlus"
+  },
+  {
+    "id": 26,
+    "name": "test2",
+    "category": "Beverages",
+    "amount": 10,
+    "unitPrice": 5,
     "supplier": "TechGear Inc."
   }
 ]
