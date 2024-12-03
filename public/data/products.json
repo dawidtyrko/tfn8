@@ -3,7 +3,7 @@
     "id": 1,
     "name": "Wireless Mouse",
     "category": "Electronics",
-    "amount": 1200,
+    "amount": 120,
     "unitPrice": 15.99,
     "dateAdded": "2024-11-01",
     "supplier": "TechGear Inc."
@@ -84,7 +84,7 @@
     "id": 10,
     "name": "Wireless Keyboard",
     "category": "Electronics",
-    "amount": 90,
+    "amount": 900,
     "unitPrice": 22.49,
     "dateAdded": "2024-11-10",
     "supplier": "TechGear Inc."
@@ -226,5 +226,13 @@
     "amount": 10,
     "unitPrice": 5,
     "supplier": "TechGear Inc."
+  },
+  {
+    "id": 27,
+    "name": "daaaaa",
+    "category": "Electronics",
+    "amount": 20,
+    "unitPrice": 30,
+    "supplier": "StyleHub Traders"
   }
 ]

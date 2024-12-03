@@ -31,8 +31,6 @@ const ProductList = () => {
         setPrevProductCount(products.length);
     }, [products.length]);
 
-
-
     useLayoutEffect(() => {
         if (isNewProductAdded && products.length > 0) {
             const lastProduct = products[products.length - 1];
@@ -53,7 +51,7 @@ const ProductList = () => {
         setSelectedProduct(null);
     };
     const handleCLearNotifications = ()=>{
-
+        removeNotification()
     }
     const filteredProducts = products.filter((product) => {
         const filterString = filter || ''; // Ensure filter is a valid string (defaults to an empty string)
@@ -74,79 +72,112 @@ const ProductList = () => {
     });
 
     return (
-        <div style={{textAlign: "center"}}>
-            {currentNotification && (
-                <div style={{
-                    backgroundColor: '#4caf50',
-                    color: 'white',
-                    padding: '10px',
-                    margin: '10px 0',
-                    borderRadius: '5px'
-                }}>
-                    {currentNotification}
-                </div>
-            )}
-            <Link href='/product' onClick={handleAddProductClick}>Add product</Link>
-            <div>
-                <div style={{padding: '5px'}}>
-                    <input
-                        style={{color: 'black', backgroundColor: '#ffffff'}}
-                        type="text"
-                        placeholder="Filter by name..."
-                        onChange={(e) => setFilter(e.target.value)}
-                    />
-                </div>
-
-                <div style={{padding: '5px'}}>
-                    <select style={{width: '200px', color: 'black'}}
-                            onChange={(e) => setCategoryFilter(e.target.value)}
+        <div style={{ textAlign: "center" }}>
+            <div style={{ textAlign: "center" }}>
+                {currentNotification.length > 0 && (
+                    <div
+                        style={{
+                            position: "fixed",
+                            top: "10px",
+                            right: "10px",
+                            backgroundColor: "#333",
+                            color: "white",
+                            padding: "10px",
+                            borderRadius: "8px",
+                            zIndex: 1000,
+                            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+                        }}
                     >
-                        {categories.map((category, index) => (
-                            <option key={index} value={category}>
-                                {category}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-
-                <div style={{padding: '5px'}}>
-                    <input
-                        style={{color: 'black'}}
-                        min="0"
-                        type="number"
-                        placeholder="Filter by amount (min)..."
-                        onChange={(e) => setAmountFilter(e.target.value)}
-                    />
-                </div>
-
-                <div>
-                    <label>Price Range: ${minPrice} - ${maxPrice}</label>
-                    <br />
-                    <input
-                        type="range"
-                        min="0"
-                        max="1000"
-                        onChange={(e) => setMinPrice(parseInt(e.target.value))}
-                    />
-                    <input
-                        type="range"
-                        min="0"
-                        max="3000"
-                        onChange={(e) => setMaxPrice(parseInt(e.target.value))}
-                    />
-                </div>
-            </div>
-            {filteredProducts.length > 0 ? (
-                filteredProducts.map((product, index) => (
-                    <div key={product.id} ref={(el) => (productRef.current[product.id] = el)}>
-                        <ProductItem product={product} />
+                        <div>
+                            {currentNotification.map((notification) => (
+                                <div key={notification.id} style={{ marginBottom: "8px" }}>
+                                    {notification.message}
+                                </div>
+                            ))}
+                        </div>
+                        <button
+                            onClick={handleCLearNotifications}
+                            style={{
+                                backgroundColor: "#ff5722",
+                                color: "white",
+                                border: "none",
+                                padding: "5px 10px",
+                                borderRadius: "4px",
+                                cursor: "pointer",
+                                marginTop: "10px",
+                            }}
+                        >
+                            Clear All
+                        </button>
                     </div>
-                ))
-            ) : (
-                <p>No products found</p>
-            )}
+                )}
+
+                <Link href="/product" onClick={handleAddProductClick}>
+                    Add product
+                </Link>
+                <div>
+                    <div style={{ padding: "5px" }}>
+                        <input
+                            style={{ color: "black", backgroundColor: "#ffffff" }}
+                            type="text"
+                            placeholder="Filter by name..."
+                            onChange={(e) => setFilter(e.target.value)}
+                        />
+                    </div>
+
+                    <div style={{ padding: "5px" }}>
+                        <select
+                            style={{ width: "200px", color: "black" }}
+                            onChange={(e) => setCategoryFilter(e.target.value)}
+                        >
+                            {categories.map((category, index) => (
+                                <option key={index} value={category}>
+                                    {category}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+
+                    <div style={{ padding: "5px" }}>
+                        <input
+                            style={{ color: "black" }}
+                            min="0"
+                            type="number"
+                            placeholder="Filter by amount (min)..."
+                            onChange={(e) => setAmountFilter(e.target.value)}
+                        />
+                    </div>
+
+                    <div>
+                        <label>Price Range: ${minPrice} - ${maxPrice}</label>
+                        <br />
+                        <input
+                            type="range"
+                            min="0"
+                            max="1000"
+                            onChange={(e) => setMinPrice(parseInt(e.target.value))}
+                        />
+                        <input
+                            type="range"
+                            min="0"
+                            max="3000"
+                            onChange={(e) => setMaxPrice(parseInt(e.target.value))}
+                        />
+                    </div>
+                </div>
+                {filteredProducts.length > 0 ? (
+                    filteredProducts.map((product, index) => (
+                        <div key={product.id} ref={(el) => (productRef.current[product.id] = el)}>
+                            <ProductItem product={product} />
+                        </div>
+                    ))
+                ) : (
+                    <p>No products found</p>
+                )}
+            </div>
         </div>
     );
-};
+
+}
 
 export default ProductList;

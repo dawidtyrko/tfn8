@@ -10,8 +10,9 @@ export const NotificationProvider = ({children}) => {
         setNotifications((prev) => [...prev, { id: Date.now(), message }]);
         console.log(notifications);
     };
-    const removeNotification = (id) => {
-        setNotifications((prev) => prev.filter((notification) => notification.id !== id));
+    const removeNotification = () => {
+        //setNotifications((prev) => prev.filter((notification) => notification.id !== id));
+        setNotifications([])
     }
     useEffect(() => {
         console.log(notifications)
